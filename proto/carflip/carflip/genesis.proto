@@ -1,0 +1,12 @@
+syntax = "proto3";
+package carflip.carflip;
+
+import "gogoproto/gogo.proto";
+import "carflip/carflip/params.proto";
+
+option go_package = "carflip/x/carflip/types";
+
+// GenesisState defines the carflip module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+}

@@ -1,0 +1,7 @@
+syntax = "proto3";
+package carflip.carflip;
+
+option go_package = "carflip/x/carflip/types";
+
+// Msg defines the Msg service.
+service Msg {}

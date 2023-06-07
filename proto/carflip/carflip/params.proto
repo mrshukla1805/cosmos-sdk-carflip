@@ -1,0 +1,12 @@
+syntax = "proto3";
+package carflip.carflip;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "carflip/x/carflip/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (gogoproto.goproto_stringer) = false;
+  
+}
