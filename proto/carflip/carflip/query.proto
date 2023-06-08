@@ -7,6 +7,7 @@ import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "carflip/carflip/params.proto";
 import "carflip/carflip/car.proto";
+import "carflip/carflip/request.proto";
 
 option go_package = "carflip/x/carflip/types";
 
@@ -26,6 +27,16 @@ service Query {
   }
   rpc CarAll (QueryAllCarRequest) returns (QueryAllCarResponse) {
     option (google.api.http).get = "/carflip/carflip/car";
+  
+  }
+  
+  // Queries a list of Request items.
+  rpc Request    (QueryGetRequestRequest) returns (QueryGetRequestResponse) {
+    option (google.api.http).get = "/carflip/carflip/request/{id}";
+  
+  }
+  rpc RequestAll (QueryAllRequestRequest) returns (QueryAllRequestResponse) {
+    option (google.api.http).get = "/carflip/carflip/request";
   
   }
 }
@@ -53,6 +64,23 @@ message QueryAllCarRequest {
 
 message QueryAllCarResponse {
   repeated Car                                    Car        = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetRequestRequest {
+  uint64 id = 1;
+}
+
+message QueryGetRequestResponse {
+  Request Request = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllRequestRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllRequestResponse {
+  repeated Request                                Request    = 1 [(gogoproto.nullable) = false];
            cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 

@@ -1,0 +1,12 @@
+syntax = "proto3";
+package carflip.carflip;
+
+option go_package = "carflip/x/carflip/types";
+
+message Request {
+  uint64 id = 1;
+  string requestTo = 2; 
+  string status = 3; 
+  int32 number = 4; 
+  string creator = 5;
+}

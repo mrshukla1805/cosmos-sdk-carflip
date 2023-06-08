@@ -5,13 +5,16 @@ package carflip.carflip;
 import "gogoproto/gogo.proto";
 import "carflip/carflip/params.proto";
 import "carflip/carflip/car.proto";
+import "carflip/carflip/request.proto";
 
 option go_package = "carflip/x/carflip/types";
 
 // GenesisState defines the carflip module's genesis state.
 message GenesisState {
-           Params params   = 1 [(gogoproto.nullable) = false];
-  repeated Car    carList  = 2 [(gogoproto.nullable) = false];
-           uint64 carCount = 3;
+           Params  params       = 1 [(gogoproto.nullable) = false];
+  repeated Car     carList      = 2 [(gogoproto.nullable) = false];
+           uint64  carCount     = 3;
+  repeated Request requestList  = 4 [(gogoproto.nullable) = false];
+           uint64  requestCount = 5;
 }
 

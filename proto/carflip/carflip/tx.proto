@@ -5,14 +5,18 @@ package carflip.carflip;
 import "carflip/carflip/car.proto";
 import "cosmos/base/v1beta1/coin.proto";
 import "gogoproto/gogo.proto";
+import "carflip/carflip/request.proto";
 
 option go_package = "carflip/x/carflip/types";
 
 // Msg defines the Msg service.
 service Msg {
-  rpc CreateCar (MsgCreateCar) returns (MsgCreateCarResponse);
-  rpc UpdateCar (MsgUpdateCar) returns (MsgUpdateCarResponse);
-  rpc DeleteCar (MsgDeleteCar) returns (MsgDeleteCarResponse);
+  rpc CreateCar     (MsgCreateCar    ) returns (MsgCreateCarResponse    );
+  rpc UpdateCar     (MsgUpdateCar    ) returns (MsgUpdateCarResponse    );
+  rpc DeleteCar     (MsgDeleteCar    ) returns (MsgDeleteCarResponse    );
+  rpc CreateRequest (MsgCreateRequest) returns (MsgCreateRequestResponse);
+  rpc UpdateRequest (MsgUpdateRequest) returns (MsgUpdateRequestResponse);
+  rpc DeleteRequest (MsgDeleteRequest) returns (MsgDeleteRequestResponse);
 }
 message MsgCreateCar {
   string                   creator = 1;
@@ -41,4 +45,32 @@ message MsgDeleteCar {
 }
 
 message MsgDeleteCarResponse {}
+
+message MsgCreateRequest {
+  string creator   = 1;
+  string requestTo = 2;
+  string status    = 3;
+  int32  number    = 4;
+}
+
+message MsgCreateRequestResponse {
+  uint64 id = 1;
+}
+
+message MsgUpdateRequest {
+  string creator   = 1;
+  uint64 id        = 2;
+  string requestTo = 3;
+  string status    = 4;
+  int32  number    = 5;
+}
+
+message MsgUpdateRequestResponse {}
+
+message MsgDeleteRequest {
+  string creator = 1;
+  uint64 id      = 2;
+}
+
+message MsgDeleteRequestResponse {}
 

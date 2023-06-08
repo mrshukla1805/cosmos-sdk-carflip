@@ -15,6 +15,13 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 
 	// Set car count
 	k.SetCarCount(ctx, genState.CarCount)
+	// Set all the request
+	for _, elem := range genState.RequestList {
+		k.SetRequest(ctx, elem)
+	}
+
+	// Set request count
+	k.SetRequestCount(ctx, genState.RequestCount)
 	// this line is used by starport scaffolding # genesis/module/init
 	k.SetParams(ctx, genState.Params)
 }
@@ -26,6 +33,8 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 
 	genesis.CarList = k.GetAllCar(ctx)
 	genesis.CarCount = k.GetCarCount(ctx)
+	genesis.RequestList = k.GetAllRequest(ctx)
+	genesis.RequestCount = k.GetRequestCount(ctx)
 	// this line is used by starport scaffolding # genesis/module/export
 
 	return genesis

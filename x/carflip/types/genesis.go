@@ -10,7 +10,8 @@ const DefaultIndex uint64 = 1
 // DefaultGenesis returns the default genesis state
 func DefaultGenesis() *GenesisState {
 	return &GenesisState{
-		CarList: []Car{},
+		CarList:     []Car{},
+		RequestList: []Request{},
 		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}
@@ -30,6 +31,18 @@ func (gs GenesisState) Validate() error {
 			return fmt.Errorf("car id should be lower or equal than the last id")
 		}
 		carIdMap[elem.Id] = true
+	}
+	// Check for duplicated ID in request
+	requestIdMap := make(map[uint64]bool)
+	requestCount := gs.GetRequestCount()
+	for _, elem := range gs.RequestList {
+		if _, ok := requestIdMap[elem.Id]; ok {
+			return fmt.Errorf("duplicated id for request")
+		}
+		if elem.Id >= requestCount {
+			return fmt.Errorf("request id should be lower or equal than the last id")
+		}
+		requestIdMap[elem.Id] = true
 	}
 	// this line is used by starport scaffolding # genesis/types/validate
 

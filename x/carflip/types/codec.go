@@ -11,6 +11,9 @@ func RegisterCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterConcrete(&MsgCreateCar{}, "carflip/CreateCar", nil)
 	cdc.RegisterConcrete(&MsgUpdateCar{}, "carflip/UpdateCar", nil)
 	cdc.RegisterConcrete(&MsgDeleteCar{}, "carflip/DeleteCar", nil)
+	cdc.RegisterConcrete(&MsgCreateRequest{}, "carflip/CreateRequest", nil)
+	cdc.RegisterConcrete(&MsgUpdateRequest{}, "carflip/UpdateRequest", nil)
+	cdc.RegisterConcrete(&MsgDeleteRequest{}, "carflip/DeleteRequest", nil)
 	// this line is used by starport scaffolding # 2
 }
 
@@ -19,6 +22,11 @@ func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 		&MsgCreateCar{},
 		&MsgUpdateCar{},
 		&MsgDeleteCar{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgCreateRequest{},
+		&MsgUpdateRequest{},
+		&MsgDeleteRequest{},
 	)
 	// this line is used by starport scaffolding # 3
 

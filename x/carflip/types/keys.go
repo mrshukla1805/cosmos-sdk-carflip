@@ -22,3 +22,8 @@ const (
 	CarKey      = "Car/value/"
 	CarCountKey = "Car/count/"
 )
+
+const (
+	RequestKey      = "Request/value/"
+	RequestCountKey = "Request/count/"
+)
