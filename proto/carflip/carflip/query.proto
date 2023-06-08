@@ -1,26 +1,58 @@
 syntax = "proto3";
+
 package carflip.carflip;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "carflip/carflip/params.proto";
+import "carflip/carflip/car.proto";
 
 option go_package = "carflip/x/carflip/types";
 
 // Query defines the gRPC querier service.
 service Query {
+  
   // Parameters queries the parameters of the module.
-  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/carflip/carflip/params";
+  
+  }
+  
+  // Queries a list of Car items.
+  rpc Car    (QueryGetCarRequest) returns (QueryGetCarResponse) {
+    option (google.api.http).get = "/carflip/carflip/car/{id}";
+  
+  }
+  rpc CarAll (QueryAllCarRequest) returns (QueryAllCarResponse) {
+    option (google.api.http).get = "/carflip/carflip/car";
+  
   }
 }
-
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
 
 // QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {
+  
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
 }
+
+message QueryGetCarRequest {
+  uint64 id = 1;
+}
+
+message QueryGetCarResponse {
+  Car Car = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllCarRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllCarResponse {
+  repeated Car                                    Car        = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+

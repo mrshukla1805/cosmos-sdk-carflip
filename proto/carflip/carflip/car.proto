@@ -1,0 +1,14 @@
+syntax = "proto3";
+package carflip.carflip;
+
+option go_package = "carflip/x/carflip/types";
+import "gogoproto/gogo.proto"; 
+import "cosmos/base/v1beta1/coin.proto"; 
+
+message Car {
+  uint64 id = 1;
+  string name = 2; 
+  int32 number = 3; 
+  cosmos.base.v1beta1.Coin price = 4 [(gogoproto.nullable) = false]; 
+  string creator = 5;
+}
