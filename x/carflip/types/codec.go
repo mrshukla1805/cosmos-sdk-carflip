@@ -14,6 +14,7 @@ func RegisterCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterConcrete(&MsgCreateRequest{}, "carflip/CreateRequest", nil)
 	cdc.RegisterConcrete(&MsgUpdateRequest{}, "carflip/UpdateRequest", nil)
 	cdc.RegisterConcrete(&MsgDeleteRequest{}, "carflip/DeleteRequest", nil)
+	cdc.RegisterConcrete(&MsgUpdateRequestStatus{}, "carflip/UpdateRequestStatus", nil)
 	// this line is used by starport scaffolding # 2
 }
 
@@ -27,6 +28,9 @@ func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 		&MsgCreateRequest{},
 		&MsgUpdateRequest{},
 		&MsgDeleteRequest{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgUpdateRequestStatus{},
 	)
 	// this line is used by starport scaffolding # 3
 

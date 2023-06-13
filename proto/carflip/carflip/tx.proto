@@ -11,12 +11,13 @@ option go_package = "carflip/x/carflip/types";
 
 // Msg defines the Msg service.
 service Msg {
-  rpc CreateCar     (MsgCreateCar    ) returns (MsgCreateCarResponse    );
-  rpc UpdateCar     (MsgUpdateCar    ) returns (MsgUpdateCarResponse    );
-  rpc DeleteCar     (MsgDeleteCar    ) returns (MsgDeleteCarResponse    );
-  rpc CreateRequest (MsgCreateRequest) returns (MsgCreateRequestResponse);
-  rpc UpdateRequest (MsgUpdateRequest) returns (MsgUpdateRequestResponse);
-  rpc DeleteRequest (MsgDeleteRequest) returns (MsgDeleteRequestResponse);
+  rpc CreateCar           (MsgCreateCar          ) returns (MsgCreateCarResponse          );
+  rpc UpdateCar           (MsgUpdateCar          ) returns (MsgUpdateCarResponse          );
+  rpc DeleteCar           (MsgDeleteCar          ) returns (MsgDeleteCarResponse          );
+  rpc CreateRequest       (MsgCreateRequest      ) returns (MsgCreateRequestResponse      );
+  rpc UpdateRequest       (MsgUpdateRequest      ) returns (MsgUpdateRequestResponse      );
+  rpc DeleteRequest       (MsgDeleteRequest      ) returns (MsgDeleteRequestResponse      );
+  rpc UpdateRequestStatus (MsgUpdateRequestStatus) returns (MsgUpdateRequestStatusResponse);
 }
 message MsgCreateCar {
   string                   creator = 1;
@@ -73,4 +74,12 @@ message MsgDeleteRequest {
 }
 
 message MsgDeleteRequestResponse {}
+
+message MsgUpdateRequestStatus {
+  string creator = 1;
+  string status  = 2;
+  uint64 id      = 3;
+}
+
+message MsgUpdateRequestStatusResponse {}
 

@@ -48,6 +48,10 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgDeleteRequest int = 100
 
+	opWeightMsgUpdateRequestStatus = "op_weight_msg_update_request_status"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgUpdateRequestStatus int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -168,6 +172,17 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgDeleteRequest,
 		carflipsimulation.SimulateMsgDeleteRequest(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgUpdateRequestStatus int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgUpdateRequestStatus, &weightMsgUpdateRequestStatus, nil,
+		func(_ *rand.Rand) {
+			weightMsgUpdateRequestStatus = defaultWeightMsgUpdateRequestStatus
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgUpdateRequestStatus,
+		carflipsimulation.SimulateMsgUpdateRequestStatus(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	// this line is used by starport scaffolding # simapp/module/operation

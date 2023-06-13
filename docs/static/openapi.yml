@@ -44440,6 +44440,8 @@ definitions:
     type: object
   carflip.carflip.MsgUpdateRequestResponse:
     type: object
+  carflip.carflip.MsgUpdateRequestStatusResponse:
+    type: object
   carflip.carflip.Params:
     type: object
     description: Params defines the parameters for the module.
