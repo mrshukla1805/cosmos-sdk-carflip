@@ -39,6 +39,12 @@ service Query {
     option (google.api.http).get = "/carflip/carflip/request";
   
   }
+  
+  // Queries a list of GetSentRequest items.
+  rpc GetSentRequest (QueryGetSentRequestRequest) returns (QueryGetSentRequestResponse) {
+    option (google.api.http).get = "/carflip/carflip/get_sent_request/{creator}";
+  
+  }
 }
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
@@ -82,5 +88,13 @@ message QueryAllRequestRequest {
 message QueryAllRequestResponse {
   repeated Request                                Request    = 1 [(gogoproto.nullable) = false];
            cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetSentRequestRequest {
+  string creator = 1; 
+}
+
+message QueryGetSentRequestResponse {
+  repeated Request request = 1 [(gogoproto.nullable) = false];
 }
 
