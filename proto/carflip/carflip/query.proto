@@ -45,6 +45,12 @@ service Query {
     option (google.api.http).get = "/carflip/carflip/get_sent_request/{creator}";
   
   }
+  
+  // Queries a list of GetRecievedRequest items.
+  rpc GetRecievedRequest (QueryGetRecievedRequestRequest) returns (QueryGetRecievedRequestResponse) {
+    option (google.api.http).get = "/carflip/carflip/get_recieved_request/{creator}";
+  
+  }
 }
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
@@ -91,10 +97,18 @@ message QueryAllRequestResponse {
 }
 
 message QueryGetSentRequestRequest {
-  string creator = 1; 
+  string creator = 1;
 }
 
 message QueryGetSentRequestResponse {
+  repeated Request request = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetRecievedRequestRequest {
+  string creator = 1;
+}
+
+message QueryGetRecievedRequestResponse {
   repeated Request request = 1 [(gogoproto.nullable) = false];
 }
 

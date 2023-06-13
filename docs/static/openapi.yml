@@ -212,6 +212,58 @@ paths:
           format: uint64
       tags:
         - Query
+  /carflip/carflip/get_recieved_request/{creator}:
+    get:
+      summary: Queries a list of GetRecievedRequest items.
+      operationId: CarflipCarflipGetRecievedRequest
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              request:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      format: uint64
+                    requestTo:
+                      type: string
+                    status:
+                      type: string
+                    number:
+                      type: integer
+                      format: int32
+                    creator:
+                      type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: creator
+          in: path
+          required: true
+          type: string
+      tags:
+        - Query
   /carflip/carflip/get_sent_request/{creator}:
     get:
       summary: Queries a list of GetSentRequest items.
@@ -44527,6 +44579,26 @@ definitions:
               signatures required by gogoproto.
           creator:
             type: string
+  carflip.carflip.QueryGetRecievedRequestResponse:
+    type: object
+    properties:
+      request:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uint64
+            requestTo:
+              type: string
+            status:
+              type: string
+            number:
+              type: integer
+              format: int32
+            creator:
+              type: string
   carflip.carflip.QueryGetRequestResponse:
     type: object
     properties:
