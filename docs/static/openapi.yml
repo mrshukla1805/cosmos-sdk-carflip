@@ -212,6 +212,69 @@ paths:
           format: uint64
       tags:
         - Query
+  /carflip/carflip/get_car_by_user/{creator}:
+    get:
+      summary: Queries a list of GetCarByUser items.
+      operationId: CarflipCarflipGetCarByUser
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              car:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uint64
+                  name:
+                    type: string
+                  number:
+                    type: integer
+                    format: int32
+                  price:
+                    type: object
+                    properties:
+                      denom:
+                        type: string
+                      amount:
+                        type: string
+                    description: >-
+                      Coin defines a token with a denomination and an amount.
+
+
+                      NOTE: The amount field is an Int which implements the
+                      custom method
+
+                      signatures required by gogoproto.
+                  creator:
+                    type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: creator
+          in: path
+          required: true
+          type: string
+      tags:
+        - Query
   /carflip/carflip/get_recieved_request/{creator}:
     get:
       summary: Queries a list of GetRecievedRequest items.
@@ -44550,6 +44613,37 @@ definitions:
                    repeated Bar results = 1;
                    PageResponse page = 2;
            }
+  carflip.carflip.QueryGetCarByUserResponse:
+    type: object
+    properties:
+      car:
+        type: object
+        properties:
+          id:
+            type: string
+            format: uint64
+          name:
+            type: string
+          number:
+            type: integer
+            format: int32
+          price:
+            type: object
+            properties:
+              denom:
+                type: string
+              amount:
+                type: string
+            description: >-
+              Coin defines a token with a denomination and an amount.
+
+
+              NOTE: The amount field is an Int which implements the custom
+              method
+
+              signatures required by gogoproto.
+          creator:
+            type: string
   carflip.carflip.QueryGetCarResponse:
     type: object
     properties:
