@@ -50,3 +50,24 @@ curl https://get.ignite.com/username/carflip@latest! | sudo bash
 - [Ignite CLI docs](https://docs.ignite.com)
 - [Cosmos SDK docs](https://docs.cosmos.network)
 - [Developer Chat](https://discord.gg/ignite)
+
+
+## Important Structs
+
+message Car {
+  uint64 id = 1;
+  string name = 2; 
+  int32 number = 3; 
+  cosmos.base.v1beta1.Coin price = 4 [(gogoproto.nullable) = false]; 
+  string creator = 5;
+}
+
+message Request {
+  uint64 id = 1;
+  string requestTo = 2; 
+  string status = 3; 
+  int32 number = 4; 
+  string creator = 5;
+}
+
+
